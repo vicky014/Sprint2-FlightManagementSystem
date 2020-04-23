@@ -17,6 +17,7 @@ import com.cg.entity.Airport;
 import com.cg.entity.Flight;
 import com.cg.entity.Schedule;
 import com.cg.entity.ScheduledFlight;
+import com.cg.exception.FMSException;
 import com.cg.service.FMSService;
 
 
@@ -36,7 +37,7 @@ public class FMSController {
 		}
 		
 		@GetMapping(value="/flight/{flightNumber}",produces= {"application/json"})
-		public Flight viewFlight(@PathVariable int flightNumber) {
+		public Flight viewFlight(@PathVariable int flightNumber) throws FMSException {
 			return fmsService.viewFlight(flightNumber);
 		}
 		
@@ -51,7 +52,7 @@ public class FMSController {
 		}
 		
 		@PutMapping(value="/flight/modify",consumes= {"application/json"})
-		public String modifyFlight(@RequestBody Flight flight){
+		public String modifyFlight(@RequestBody Flight flight) throws FMSException{
 			return fmsService.modifyFlight(flight);
 		}
 		
@@ -77,33 +78,33 @@ public class FMSController {
 
 			//ScheduledFlight
 			
-			@GetMapping("/scheduledFight")
+			@GetMapping("/scheduledFlight")
 			public List<ScheduledFlight> viewScheduledFlights(){
 				return fmsService.viewScheduledFlights();
 			}
 			
-			@GetMapping(value="/scheduledFight/{flightNumber}",produces= {"application/json"})
+			@GetMapping(value="/scheduledFlight/{flightNumber}",produces= {"application/json"})
 			public ScheduledFlight viewScheduledFlight(@PathVariable int flightNumber) {
 				return fmsService.viewScheduledFlight(flightNumber);
 			}
 			
-			@PostMapping(value="/scheduledFight/add",produces= {"application/json"})
+			@PostMapping(value="/scheduledFlight/add",produces= {"application/json"})
 			public String scheduleFlight(@RequestBody ScheduledFlight scheduledFlight) {
 				return fmsService.scheduleFlight(scheduledFlight);
 			}
 			
-			@PutMapping(value="/scheduledFight/modify",consumes= {"application/json"})
+			@PutMapping(value="/scheduledFlight/modify",consumes= {"application/json"})
 			public String modifyScheduledFlight(@RequestBody Flight flight,Schedule schedule,int flightNumber) {
 				return fmsService.modifyScheduledFlight(flight, schedule, flightNumber);
 			}
 			
-			@DeleteMapping(value="/scheduledFight/delete/{flightNumber}")
+			@DeleteMapping(value="/scheduledFlight/delete/{flightNumber}")
 			public String deleteScheduledFlight(@PathVariable int flightNumber) {
 				return fmsService.deleteFlight(flightNumber);
 			}
 			
 			//doubt
-			@GetMapping(value="/scheduledFight/search",produces= {"application/json"})
+			@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
 			public List<ScheduledFlight> viewScheduledFlights(@RequestBody Airport sourceAirport,@RequestBody Airport destinationAirport,@RequestBody LocalDate arrivalDate){
 				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
 			}

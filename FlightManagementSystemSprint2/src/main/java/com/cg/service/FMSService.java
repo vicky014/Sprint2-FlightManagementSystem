@@ -11,6 +11,7 @@ import com.cg.entity.Airport;
 import com.cg.entity.Flight;
 import com.cg.entity.Schedule;
 import com.cg.entity.ScheduledFlight;
+import com.cg.exception.FMSException;
 
 @Service
 public class FMSService {
@@ -23,7 +24,21 @@ public class FMSService {
 				return flightDao.viewFlight();
 			}
 			
-			public Flight viewFlight(int flightNumber) {
+			public Flight viewFlight(int flightNumber) throws FMSException {
+				//
+				
+//				
+//				Flight flight1=viewFlight(flightNumber);
+//				
+//				if(flight1!=null)
+//				{
+//					return flightDao.viewFlight(flightNumber);
+//				}
+//				else
+//					throw new FMSException("flight Number does not exist");
+//				
+//				
+//				///
 				return flightDao.viewFlight(flightNumber);
 			}
 			
@@ -35,8 +50,21 @@ public class FMSService {
 				return flightDao.deleteFlight(flightNumber);
 			}
 			
-			public String modifyFlight(Flight flight) {
-				return flightDao.modifyFlight(flight);
+			public String modifyFlight(Flight flight) throws FMSException {
+				///////
+				int flightNumber=flight.getFlightNumber();
+				
+				Flight flight1=viewFlight(flightNumber);
+				
+				if(flight1!=null)
+				{
+					return flightDao.modifyFlight(flight);
+				}
+				else
+					throw new FMSException("flight Number does not exist");
+				
+				//////////
+				//return flightDao.modifyFlight(flight);
 			}
 			
 	//Airport

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cg.entity.Airport;
 import com.cg.entity.Flight;
@@ -27,9 +28,9 @@ public class FMSDao {
 	
 	//Flight
 		//adding new flight
-			public String addFlight(Flight f)
+			public String addFlight(Flight flight)
 			{
-				em.persist(f);
+				em.persist(flight);
 				return "flight added successfully";
 			}
 			
@@ -39,21 +40,21 @@ public class FMSDao {
 				Query query=em.createQuery("select f from Flight f");
 				return query.getResultList();
 			}
-
+/////////////////////////////////
 			//view specific flight
 			public Flight viewFlight(int flightNumber)
 			{
 				List <Flight> list=viewFlight();
-				Flight f=null;
+				Flight flight=null;
 				Optional <Flight> optional=list.stream().
 						filter(f1->f1.getFlightNumber()==flightNumber).findFirst();
 				if(optional.isPresent()) {
-					f=optional.get();
+					flight=optional.get();
 				}
-				return f;
+				return flight;
 				
 			}
-			
+//////////////////////////////////			
 			//removing unwanted flight
 			public String deleteFlight(int flightNumber) {
 				em.remove(viewFlight(flightNumber));
@@ -61,8 +62,8 @@ public class FMSDao {
 			}
 			
 			//modify flight details
-			public String modifyFlight(Flight f) {
-				em.merge(f);
+			public String modifyFlight(Flight flight) {
+				em.merge(flight);
 				return "Flight updated successfully";
 			}
 
@@ -70,9 +71,9 @@ public class FMSDao {
 		//Airport
 			
 			//adding new airport
-			public String addAirport(Airport a)
+			public String addAirport(Airport airport)
 			{
-				em.persist(a);
+				em.persist(airport);
 				return "airport added successfuly";
 			}
 			
@@ -101,8 +102,8 @@ public class FMSDao {
 		//Schedule
 			
 			//adding new schedule
-			public String addSchedule(Schedule s) {
-				em.persist(s);
+			public String addSchedule(Schedule schedule) {
+				em.persist(schedule);
 				return "scheduled successfully";
 			}
 			
@@ -116,9 +117,9 @@ public class FMSDao {
 			
 			//adding scheduled flight
 			
-			public String scheduleFlight(ScheduledFlight sf)
+			public String scheduleFlight(ScheduledFlight scheduledFlight)
 			{
-				em.persist(sf);
+				em.persist(scheduledFlight);
 				return "Flight scheduled successfully";
 			}
 			
@@ -167,10 +168,21 @@ public class FMSDao {
 			
 			//searching scheduled flight with src, dest airport and date
 			
-			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate)
+//			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate)
+//			{
+//				Query query=em.createQuery("select sf from ScheduledFlight sf where SourceAirport="+sourceAirport+
+//						"AND DestinationAirport="+destinationAirport+" AND ArrivalDate="+arrivalDate);
+//				return query.getResultList();
+//			}
+			///////////////////////////
+			public List<ScheduledFlight> viewScheduledFlights( String sourceAirport, String destinationAirport, LocalDate arrivalDate)
 			{
-				Query query=em.createQuery("select sf from ScheduledFlight sf where SourceAirport="+sourceAirport+
-						"AND DestinationAirport="+destinationAirport+" AND ArrivalDate="+arrivalDate);
+				Query query=em.createQuery("select sf from ScheduledFlight sf where Source_Airport="+sourceAirport+
+						" AND Destination_Airport="+destinationAirport+" AND Arrival_Date="+arrivalDate);
 				return query.getResultList();
+				
+				
 			}
+			
+			
 }

@@ -19,13 +19,17 @@ public class Schedule {
 	@Id
 	private int scheduleId;
 	
-	@OneToOne
-	@JoinColumn(name="SourceAirport",referencedColumnName = "airportCode")
-	private Airport sourceAirport;
+//	@OneToOne
+//	@JoinColumn(name="SourceAirport",referencedColumnName = "airportCode")
+//	private Airport sourceAirport;
+
+	private String sourceAirport;
 	
-	@OneToOne
-	@JoinColumn(name="DestinationAirport",referencedColumnName = "airportCode")
-	private Airport destinationAirport;
+//	@OneToOne
+//	@JoinColumn(name="DestinationAirport",referencedColumnName = "airportCode")
+//	private Airport destinationAirport;
+
+	private String destinationAirport;
 	
 	@Column(name="ArrivalDate")
 	private LocalDate arrivalDate;
@@ -52,44 +56,78 @@ public class Schedule {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Schedule(int scheduleId, Airport sourceAirport, Airport destinationAirport, LocalDate arrivalDate,
-			LocalDate departureDate, String arrivalTime, String departureTime) {
-		super();
-		this.scheduleId = scheduleId;
-		this.sourceAirport = sourceAirport;
-		this.destinationAirport = destinationAirport;
-		this.arrivalDate = arrivalDate;
-		this.departureDate = departureDate;
-		this.arrivalTime = arrivalTime;
-		this.departureTime = departureTime;
-	}
+//	public Schedule(int scheduleId, Airport sourceAirport, Airport destinationAirport, LocalDate arrivalDate,
+//			LocalDate departureDate, String arrivalTime, String departureTime) {
+//		super();
+//		this.scheduleId = scheduleId;
+//		this.sourceAirport = sourceAirport;
+//		this.destinationAirport = destinationAirport;
+//		this.arrivalDate = arrivalDate;
+//		this.departureDate = departureDate;
+//		this.arrivalTime = arrivalTime;
+//		this.departureTime = departureTime;
+//	}
+	
+	
+	
+	
 
 	public int getScheduleId() {
 		return scheduleId;
 	}
 
+	public Schedule(int scheduleId, String sourceAirport, String destinationAirport, LocalDate arrivalDate,
+		LocalDate departureDate, String arrivalTime, String departureTime) {
+	super();
+	this.scheduleId = scheduleId;
+	this.sourceAirport = sourceAirport;
+	this.destinationAirport = destinationAirport;
+	this.arrivalDate = arrivalDate;
+	this.departureDate = departureDate;
+	this.arrivalTime = arrivalTime;
+	this.departureTime = departureTime;
+}
+
 	public void setScheduleId(int scheduleId) {
 		this.scheduleId = scheduleId;
 	}
 
-	public Airport getSourceAirport() {
-		return sourceAirport;
-	}
-
-	public void setSourceAirport(Airport sourceAirport) {
-		this.sourceAirport = sourceAirport;
-	}
-
-	public Airport getDestinationAirport() {
-		return destinationAirport;
-	}
-
-	public void setDestinationAirport(Airport destinationAirport) {
-		this.destinationAirport = destinationAirport;
-	}
+//	public Airport getSourceAirport() {
+//		return sourceAirport;
+//	}
+//
+//	public void setSourceAirport(Airport sourceAirport) {
+//		this.sourceAirport = sourceAirport;
+//	}
+//
+//	public Airport getDestinationAirport() {
+//		return destinationAirport;
+//	}
+//
+//	public void setDestinationAirport(Airport destinationAirport) {
+//		this.destinationAirport = destinationAirport;
+//	}
+	
+	
 
 	public LocalDate getArrivalDate() {
 		return arrivalDate;
+	}
+
+	public String getSourceAirport() {
+		return sourceAirport;
+	}
+
+	public void setSourceAirport(String sourceAirport) {
+		this.sourceAirport = sourceAirport;
+	}
+
+	public String getDestinationAirport() {
+		return destinationAirport;
+	}
+
+	public void setDestinationAirport(String destinationAirport) {
+		this.destinationAirport = destinationAirport;
 	}
 
 	public void setArrivalDate(LocalDate arrivalDate) {

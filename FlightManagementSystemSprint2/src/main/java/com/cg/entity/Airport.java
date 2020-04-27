@@ -22,13 +22,13 @@ public class Airport {
 	
     
     ////////////////////////
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="src")
-    private Schedule schedulesrc;
-    
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name="dest")
-    private Schedule scheduledest;
+//    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name="src")
+//    private Schedule schedulesrc;
+//    
+//    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @JoinColumn(name="dest")
+//    private Schedule scheduledest;
     //////////////////////////
     
     public Airport() {

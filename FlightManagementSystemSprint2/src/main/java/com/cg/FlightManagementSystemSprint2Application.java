@@ -47,10 +47,13 @@ public class FlightManagementSystemSprint2Application implements CommandLineRunn
 		
 		
 
-		Schedule s=new Schedule(1,a,a1,LocalDate.of(2020, 10, 20),LocalDate.of(2020, 10, 20),"12:15","12:30");
+//		Schedule s=new Schedule(1,a,a1,LocalDate.of(2020, 10, 20),LocalDate.of(2020, 10, 20),"12:15","12:30");
+//		
+//		Schedule s1=new Schedule(2,a1,a,LocalDate.of(2020, 11, 21),LocalDate.of(2020, 11, 21),"22:15","22:30");
 		
-		Schedule s1=new Schedule(2,a1,a,LocalDate.of(2020, 11, 21),LocalDate.of(2020, 11, 21),"22:15","22:30");
-
+		Schedule s=new Schedule(1,a.getAirportCode(),a1.getAirportCode(),LocalDate.of(2020, 10, 20),LocalDate.of(2020, 10, 20),"12:15","12:30");
+		Schedule s1=new Schedule(2,a1.getAirportCode(),a.getAirportCode(),LocalDate.of(2020, 11, 21),LocalDate.of(2020, 11, 21),"22:15","22:30");
+		
 		fdao.addSchedule(s);
 		fdao.addSchedule(s1);
 	

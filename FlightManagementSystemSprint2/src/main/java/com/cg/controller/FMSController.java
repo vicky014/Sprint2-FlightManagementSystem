@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.entity.Airport;
@@ -42,7 +44,7 @@ public class FMSController {
 		}
 		
 		@PostMapping(value="/flight/add",consumes={"application/json"})
-		public String addFlight(@RequestBody Flight flight){
+		public String addFlight(@RequestBody Flight flight) throws FMSException{
 			return fmsService.addFlight(flight);
 		}
 
@@ -60,7 +62,7 @@ public class FMSController {
 		//Airport
 		
 			@PostMapping(value="/airport/add",consumes= {"application/json"})
-			public String addAirport(@RequestBody Airport airport) {
+			public String addAirport(@RequestBody Airport airport) throws FMSException {
 				return fmsService.addAirport(airport);
 				
 			}
@@ -71,7 +73,7 @@ public class FMSController {
 			}
 			
 			@GetMapping(value="/airport/{airportCode}")
-			public Airport viewAirport(@PathVariable String airportCode) {
+			public Airport viewAirport(@PathVariable String airportCode) throws FMSException {
 				return fmsService.viewAirport(airportCode);
 			}
 			
@@ -84,12 +86,12 @@ public class FMSController {
 			}
 			
 			@GetMapping(value="/scheduledFlight/{flightNumber}",produces= {"application/json"})
-			public ScheduledFlight viewScheduledFlight(@PathVariable int flightNumber) {
+			public ScheduledFlight viewScheduledFlight(@PathVariable int flightNumber) throws FMSException {
 				return fmsService.viewScheduledFlight(flightNumber);
 			}
 			
 			@PostMapping(value="/scheduledFlight/add",produces= {"application/json"})
-			public String scheduleFlight(@RequestBody ScheduledFlight scheduledFlight) {
+			public String scheduleFlight(@RequestBody ScheduledFlight scheduledFlight) throws FMSException {
 				return fmsService.scheduleFlight(scheduledFlight);
 			}
 			
@@ -104,8 +106,14 @@ public class FMSController {
 			}
 			
 			//doubt
-			@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
-			public List<ScheduledFlight> viewScheduledFlights(@RequestBody Airport sourceAirport,@RequestBody Airport destinationAirport,@RequestBody LocalDate arrivalDate){
+		//	@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
+//			public List<ScheduledFlight> viewScheduledFlights(@RequestBody Airport sourceAirport,@RequestBody Airport destinationAirport,@RequestBody LocalDate arrivalDate){
+//				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
+//			}
+			
+			
+			@GetMapping(value="/scheduledFlight/search/{sourceAirport}/{destinationAirport}/{arrivalDate}",produces= {"application/json"})
+			public List<ScheduledFlight> viewScheduledFlights(@PathVariable String sourceAirport,@PathVariable String destinationAirport,@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate arrivalDate){
 				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
 			}
 			
@@ -115,9 +123,9 @@ public class FMSController {
 			public List<Schedule> viewAllSchedule(){
 				return fmsService.viewAllSchedule();
 			}
-//			
+			
 //			@PostMapping(value="/schedule/add",produces="{application/json}")
-//			public String addSchedule(@RequestBody Schedule s)
+//			public String addSchedule(@RequestBody Schedule s) throws FMSException
 //			{
 //				return fmsService.addSchedule(s);
 //			}

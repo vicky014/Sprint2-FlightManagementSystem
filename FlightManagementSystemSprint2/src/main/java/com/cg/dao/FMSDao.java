@@ -19,15 +19,15 @@ import com.cg.entity.ScheduledFlight;
 
 @Repository
 @Transactional
-public class FMSDao {
+public class FMSDao implements DAOInt{
 
 	
 
 	@PersistenceContext
 	EntityManager em;
 	
-	//Flight
-		//adding new flight
+//	//Flight
+//		//adding new flight
 			public String addFlight(Flight flight)
 			{
 				em.persist(flight);
@@ -168,21 +168,36 @@ public class FMSDao {
 			
 			//searching scheduled flight with src, dest airport and date
 			
-//			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate)
-//			{
-//				Query query=em.createQuery("select sf from ScheduledFlight sf where SourceAirport="+sourceAirport+
-//						"AND DestinationAirport="+destinationAirport+" AND ArrivalDate="+arrivalDate);
-//				return query.getResultList();
-//			}
-			///////////////////////////
-			public List<ScheduledFlight> viewScheduledFlights( String sourceAirport, String destinationAirport, LocalDate arrivalDate)
+			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate)
 			{
-				Query query=em.createQuery("select sf from ScheduledFlight sf where Source_Airport="+sourceAirport+
-						" AND Destination_Airport="+destinationAirport+" AND Arrival_Date="+arrivalDate);
+				String src=sourceAirport.getAirportCode();
+				
+				String dest=destinationAirport.getAirportCode();
+				
+//				String src="VTZ";
+//				
+//				String dest="DEL";
+//				
+				int day=arrivalDate.getDayOfYear();
+				int month=arrivalDate.getMonthValue();
+				int year=arrivalDate.getYear();
+
+				String date=day+"-"+month+"-"+year;
+				System.out.println("DATE : "+date);
+				
+				Query query=em.createQuery("from ScheduledFlight sf where s.sourceairport="+src+
+						"AND sf.destinationairport="+dest+" AND sf.arrivaldate="+date);
 				return query.getResultList();
-				
-				
 			}
-			
+//			///////////////////////////
+//			public List<ScheduledFlight> viewScheduledFlights( String sourceAirport, String destinationAirport, LocalDate arrivalDate)
+//			{
+//				Query query=em.createQuery("select sf from ScheduledFlight sf where Source_Airport="+sourceAirport+
+//						" AND Destination_Airport="+destinationAirport+" AND Arrival_Date="+arrivalDate);
+//				return query.getResultList();
+//				
+//				
+//			}
+//			
 			
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.dao.DAOInt;
 import com.cg.dao.FMSDao;
 import com.cg.entity.Airport;
 import com.cg.entity.Flight;
@@ -17,12 +18,14 @@ import com.cg.exception.FMSException;
 @Service
 public class FMSService {
 
+
+	//private FMSDao flightDao;
 	@Autowired
-	private FMSDao flightDao;
+	private DAOInt daoInt;
 	
 	//Flight
 			public List<Flight> viewFlight(){
-				return flightDao.viewFlight();
+				return daoInt.viewFlight();
 			}
 			
 			public Flight viewFlight(int flightNumber) throws FMSException {
@@ -34,7 +37,7 @@ public class FMSService {
 				
 				if(optional.isPresent())
 				{
-					return flightDao.viewFlight(flightNumber);
+					return daoInt.viewFlight(flightNumber);
 				}
 				
 				else
@@ -70,7 +73,7 @@ public class FMSService {
 				}
 				
 				else
-					return flightDao.addFlight(flight);
+					return daoInt.addFlight(flight);
 							
 				
 				
@@ -78,7 +81,7 @@ public class FMSService {
 			}
 			
 			public String deleteFlight(int flightNumber) {
-				return flightDao.deleteFlight(flightNumber);
+				return daoInt.deleteFlight(flightNumber);
 			}
 			
 			public String modifyFlight(Flight flight) throws FMSException {
@@ -89,7 +92,7 @@ public class FMSService {
 				
 				if(flight1!=null)
 				{
-					return flightDao.modifyFlight(flight);
+					return daoInt.modifyFlight(flight);
 				}
 				else
 					throw new FMSException("flight Number does not exist");
@@ -113,13 +116,13 @@ public class FMSService {
 				}
 				
 				else
-					return flightDao.addAirport(airport);
+					return daoInt.addAirport(airport);
 				
 				//return flightDao.addAirport(airport);
 			}
 			
 			public List<Airport> viewAirport(){
-				return flightDao.viewAirport();
+				return daoInt.viewAirport();
 			}
 			
 			public Airport viewAirport(String airportCode) throws FMSException {
@@ -130,7 +133,7 @@ public class FMSService {
 				
 				if(optional.isPresent())
 				{
-					return flightDao.viewAirport(airportCode);
+					return daoInt.viewAirport(airportCode);
 				}
 				
 				else
@@ -144,7 +147,7 @@ public class FMSService {
 	//ScheduledFlight
 			
 			public List<ScheduledFlight> viewScheduledFlights(){
-				return flightDao.viewScheduledFlights();
+				return daoInt.viewScheduledFlights();
 			}
 			
 			public ScheduledFlight viewScheduledFlight(int flightNumber) throws FMSException {
@@ -155,7 +158,7 @@ public class FMSService {
 				
 				if(optional.isPresent())
 				{
-					return flightDao.viewScheduledFlight(flightNumber);
+					return daoInt.viewScheduledFlight(flightNumber);
 					
 					
 				}
@@ -168,36 +171,36 @@ public class FMSService {
 			
 			public String scheduleFlight(ScheduledFlight scheduledFlight) throws FMSException {
 				
-				List<ScheduledFlight> list=viewScheduledFlights();
-				Optional <ScheduledFlight> optional=list.stream().
-						filter(sf1->sf1.getScheduledFlightId()==scheduledFlight.getScheduledFlightId()).findFirst();
-				
-				if(optional.isPresent())
-				{
-					throw new FMSException("This ID already exist try new one");
-					
-				}
-				
-				else
-					return flightDao.scheduleFlight(scheduledFlight);
-				//return flightDao.scheduleFlight(scheduledFlight);
+//				List<ScheduledFlight> list=viewScheduledFlights();
+//				Optional <ScheduledFlight> optional=list.stream().
+//						filter(sf1->sf1.getScheduledFlightId()==scheduledFlight.getScheduledFlightId()).findFirst();
+//				
+//				if(optional.isPresent())
+//				{
+//					throw new FMSException("This ID already exist try new one");
+//					
+//				}
+//				
+//				else
+//					return flightDao.scheduleFlight(scheduledFlight);
+				return daoInt.scheduleFlight(scheduledFlight);
 			}
 			
 			public String modifyScheduledFlight(Flight flight,Schedule schedule,int flightNumber) {
-				return flightDao.modifyScheduledFlight(flight, schedule, flightNumber);
+				return daoInt.modifyScheduledFlight(flight, schedule, flightNumber);
 			}
 			
 //			public String deleteScheduledFlight(int flightNumber) {
 //				return flightDao.deleteScheduledFlight(flightNumber);
 //			}
 			
-//			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate){
+			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate){
+				return daoInt.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
+			}
+//			
+//			public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String destinationAirport,LocalDate arrivalDate){
 //				return flightDao.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
 //			}
-			
-			public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String destinationAirport,LocalDate arrivalDate){
-				return flightDao.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
-			}
 			
 			
 			
@@ -205,7 +208,7 @@ public class FMSService {
 			
 			public List<Schedule> viewAllSchedule()
 			{
-				return flightDao.viewAllSchedule();
+				return daoInt.viewAllSchedule();
 			}
 //			
 //			public String addSchedule(Schedule schedule) throws FMSException

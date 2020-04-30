@@ -105,18 +105,22 @@ public class FMSController {
 				return fmsService.deleteFlight(flightNumber);
 			}
 			
-			//doubt
-		//	@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
+//			//doubt
+//			@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
 //			public List<ScheduledFlight> viewScheduledFlights(@RequestBody Airport sourceAirport,@RequestBody Airport destinationAirport,@RequestBody LocalDate arrivalDate){
 //				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
 //			}
-			
-			
-			@GetMapping(value="/scheduledFlight/search/{sourceAirport}/{destinationAirport}/{arrivalDate}",produces= {"application/json"})
-			public List<ScheduledFlight> viewScheduledFlights(@PathVariable String sourceAirport,@PathVariable String destinationAirport,@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate arrivalDate){
+//			
+			@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
+			public List<ScheduledFlight> viewScheduledFlights(@RequestBody Airport sourceAirport,@RequestBody Airport destinationAirport,@RequestBody LocalDate arrivalDate){
 				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
 			}
 			
+//			@GetMapping(value="/scheduledFlight/search/{sourceAirport}/{destinationAirport}/{arrivalDate}",produces= {"application/json"})
+//			public List<ScheduledFlight> viewScheduledFlights(@PathVariable String sourceAirport,@PathVariable String destinationAirport,@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate arrivalDate){
+//				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
+//			}
+//			
 			//Schedule
 			
 			@GetMapping("/schedule")

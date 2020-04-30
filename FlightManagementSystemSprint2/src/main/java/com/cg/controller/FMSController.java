@@ -111,10 +111,10 @@ public class FMSController {
 //				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
 //			}
 //			
-			@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
+		/*	@GetMapping(value="/scheduledFlight/search",produces= {"application/json"})
 			public List<ScheduledFlight> viewScheduledFlights(@RequestBody Airport sourceAirport,@RequestBody Airport destinationAirport,@RequestBody LocalDate arrivalDate){
 				return fmsService.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
-			}
+			}*/
 			
 //			@GetMapping(value="/scheduledFlight/search/{sourceAirport}/{destinationAirport}/{arrivalDate}",produces= {"application/json"})
 //			public List<ScheduledFlight> viewScheduledFlights(@PathVariable String sourceAirport,@PathVariable String destinationAirport,@PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate arrivalDate){

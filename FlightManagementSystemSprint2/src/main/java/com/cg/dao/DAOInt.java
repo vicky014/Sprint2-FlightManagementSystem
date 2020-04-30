@@ -13,69 +13,101 @@ import com.cg.entity.ScheduledFlight;
 
 public interface DAOInt {
 	
+	
+//Flight	
+	/*if admin wants to add a new Flight this 
+	function adds data to Oracle with object*/
+	
 	public String addFlight(Flight flight);
 	
-	//view all flights
+	/*if admin wants to view all Flight details
+	/this function is used*/
 	public List<Flight> viewFlight();
-/////////////////////////////////
-	//view specific flight
+	
+
+	/*if admin wats to search for specififc Flight
+	  details this function is used*/
+	
 	public Flight viewFlight(int flightNumber);
-//////////////////////////////////	
-	//removing unwanted flight
+
+	/* if admin wants to delete a Flight this function is used
+	  */
 	public String deleteFlight(int flightNumber) ;
 	
-	//modify flight details
+	/* if admin wants to update some Flight details with 
+	 * flight number  this function is used*/
 	public String modifyFlight(Flight flight) ;
 
 	
 //Airport
 	
-	//adding new airport
+	/*if admin wants to add a new Airport this 
+	function adds data to Oracle with object*/
+	
 	public String addAirport(Airport airport);
 	
-	//view all airports
+	/*if admin wants to view all Airports details
+	/this function is used*/
+	
 	public List<Airport> viewAirport();
 	
-	//view specific airport
+	/*if admin wats to search for specififc Airport
+	  details this function is used*/
+	
 	public Airport viewAirport(String airportCode);
+	
 	
 //Schedule
 	
-	//adding new schedule
+	/*if admin wants to add a new Schedule of Airports this 
+	function adds data to Oracle with object*/
+	
 	public String addSchedule(Schedule schedule) ;
+	
+	/*if admin wants to see all Schedules of Airports*/
 	
 	public List<Schedule> viewAllSchedule();
 
 //ScheduledFlight
 	
-	//adding scheduled flight
+	/*if admin wants to add a new Scheduled Flight this 
+	function adds data to Oracle with object*/
 	
 	public String scheduleFlight(ScheduledFlight scheduledFlight);
 	
-	//viewing all scheduled flight
+	/*if admin wants to view all Scheduled flights this
+	 * function is used*/
+	
 	public List<ScheduledFlight> viewScheduledFlights();
 	
-	//viewing specific scheduled flight
+	/*if admin wants to search for a specific
+	 * flights scheduling this function is used*/
+	
 	public ScheduledFlight viewScheduledFlight(int flightNumber);
 	
-	//modifying scheduled flihgt
+	/*if admin wants to modify some Scheduled Flight deatils 
+	 * this function is used*/
+	
 	public String modifyScheduledFlight(Flight flight,Schedule schedule,int flightNumber) ;
 	
-	//deleting scheduled flight
+	/*if admin wants to delete a specific Scheduled Flight 
+	 * this function is used*/
 	
 	public String deleteScheduledFlight(int flightNumber);
 	
-	//searching scheduled flight with src, dest airport and date
 	
-	public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate);
-//	///////////////////////////
-//	public List<ScheduledFlight> viewScheduledFlights( String sourceAirport, String destinationAirport, LocalDate arrivalDate)
-//	{
-//		Query query=em.createQuery("select sf from ScheduledFlight sf where Source_Airport="+sourceAirport+
-//				" AND Destination_Airport="+destinationAirport+" AND Arrival_Date="+arrivalDate);
-//		return query.getResultList();
-//		
-//		
-//	}
+//	
+//	/if admin wants to search Scheduled Flight based on Source Airport Destination Airport and ArrivalDate
+//	
+//	public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate);
+////	///////////////////////////
+////	public List<ScheduledFlight> viewScheduledFlights( String sourceAirport, String destinationAirport, LocalDate arrivalDate)
+////	{
+////		Query query=em.createQuery("select sf from ScheduledFlight sf where Source_Airport="+sourceAirport+
+////				" AND Destination_Airport="+destinationAirport+" AND Arrival_Date="+arrivalDate);
+////		return query.getResultList();
+////		
+////		
+////	}
 
 }

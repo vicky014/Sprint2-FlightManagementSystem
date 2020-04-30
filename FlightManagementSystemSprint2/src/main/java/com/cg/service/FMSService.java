@@ -194,9 +194,9 @@ public class FMSService {
 //				return flightDao.deleteScheduledFlight(flightNumber);
 //			}
 			
-			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate){
+/*			public List<ScheduledFlight> viewScheduledFlights(Airport sourceAirport,Airport destinationAirport,LocalDate arrivalDate){
 				return daoInt.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);
-			}
+			}*/
 //			
 //			public List<ScheduledFlight> viewScheduledFlights(String sourceAirport,String destinationAirport,LocalDate arrivalDate){
 //				return flightDao.viewScheduledFlights(sourceAirport, destinationAirport, arrivalDate);

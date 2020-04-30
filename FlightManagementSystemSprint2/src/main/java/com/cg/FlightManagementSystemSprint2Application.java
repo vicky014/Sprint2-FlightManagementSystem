@@ -31,10 +31,10 @@ public class FlightManagementSystemSprint2Application implements CommandLineRunn
 		
 		System.out.println("Welcome");
 		
-//
-//		Flight f=new Flight(100,"A1","Indigo",200);
-//		Flight f1=new Flight(101,"B1","AirIndia",100);
-//		
+
+//		Flight f=new Flight(102,"C1","Vistara",150);
+////		Flight f1=new Flight(101,"B1","AirIndia",100);
+////		
 //		fdao.addFlight(f);
 //		fdao.addFlight(f1);
 //		
